@@ -1,4 +1,5 @@
 from math import log2
+import csv
 
 #############################################################################################################################################################
 
@@ -248,6 +249,8 @@ print("Ganho idade >30 nao trabalha estado = %0.3f\n" %(ganhoIdadeMenor_30_NaoTr
 #############################################################################################################################################################
 #############################################################################################################################################################
 
+print("ESQUEMA ARVORE\n")
+
 print ("0 IDADE [<= 30]")
 print ("0 IDADE [> 30]\n")
 
@@ -265,23 +268,36 @@ print ("3 BOLSONARO [ > 30, SIM, NAO ]")
 print ("3 BOLSONARO [ > 30, NAO, SC ]")
 print ("3 BOLSONARO [ > 30, NAO, RS ]\n")
 
-# * VALIDAÇÃO * #
+def main():
+	#BaseValidar = list(readCSV('BaseValidar.csv'))
+	BaseValidar = open("BaseValidar.csv").read().replace(' ', '').splitlines()
+	print(BaseValidar, "\n\n")
 
-print("IDADE ?"); Idade = int(input())
-print("Trabalha ? (sim/nao)"); Trabalha = str(input())
-print("Estudante UNOESC ? (sim/nao)"); EstudaUno = str(input())
-print("Estado que votou ? (SC/RS)"); Estado = str(input())
-
-if Idade <= 30:
-	print("BOLSONARO")
-else:
-	if Trabalha == "sim":
-		if EstudaUno == "sim":
+	for x in BaseValidar:
+		dados = x.split(';')
+		#n_colunas = (len(dados))
+		#for y in n_colunas:
+		if dados[0] == "<= 30":
 			print("BOLSONARO")
+			check_candidato = "JairBolsonaro"
 		else:
-			print("BOLSONARO")
-	else:
-		if (Estado == "SC") or (Estado == "sc"):
-			print("BOLSONARO")
+			if dados[1] == "sim":
+				if dados[2] == "sim":
+					print("BOLSONARO")
+					check_candidato = "JairBolsonaro"
+				else:
+					print("BOLSONARO")
+			else:
+				if (dados[3] == "SC") or (dados[3] == "sc"):
+					print("BOLSONARO")
+					check_candidato = "JairBolsonaro"
+				else:
+					print("BOLSONARO")
+					check_candidato = "JairBolsonaro"
+		if(check_candidato == dados[4]):
+			print("ID3 acertou\n\n")
 		else:
-			print("BOLSONARO")
+			print("ID3 errou")
+			print("A pessoa tinha votado em %s\n\n" %(dados[4]))
+			
+main()
