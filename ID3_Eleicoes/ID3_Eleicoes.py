@@ -1,3 +1,6 @@
+#Acadêmicos: Eduardo Ferrarezi, Giovani Padoim, Matheus Grigol Ortolan e Willian Agostini
+#Disciplina: IA2
+
 from math import log2
 import csv
 
@@ -272,6 +275,9 @@ def main():
 	#BaseValidar = list(readCSV('BaseValidar.csv'))
 	BaseValidar = open("BaseValidar.csv").read().replace(' ', '').splitlines()
 	print(BaseValidar, "\n\n")
+
+	# * PERCORRE ARVORE PARA VALIDAÇÃO * #
+	print("PERCORRENDO ARVORE:\n")
 
 	for x in BaseValidar:
 		dados = x.split(';')
